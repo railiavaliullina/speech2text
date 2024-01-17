@@ -1,8 +1,8 @@
 import os
 import json
 import speech_recognition
-from pydub import AudioSegment
 
+from pydub import AudioSegment
 from datetime import datetime
 from argparse import ArgumentParser
 
