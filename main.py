@@ -88,6 +88,8 @@ def log_result(recognised_text):
 
 
 if __name__ == '__main__':
+
+    # parse input arguments
     parser = ArgumentParser()
     parser.add_argument('--lang', default='en', help='Choose audiofile language from list ["en", "ru"]')
     parser.add_argument('--speed_scale', default='1.5',
@@ -98,14 +100,17 @@ if __name__ == '__main__':
     parser.add_argument('--output_path', default='output_files')
     args = parser.parse_args()
 
-    now = datetime.strftime(datetime.now(), '%d%m%y_%H%M%S')
+    # get input file full path and read the signal
     input_file_path = os.path.join(args.input_path, f'{args.lang}.wav')
-
-    # audio modification (speed, volume)
     signal = read_signal(input_file_path)
+
+    # get current date and time for output filenames
+    now = datetime.strftime(datetime.now(), '%d%m%y_%H%M%S')
+
+    # run audio modification (by speed and volume) and save modified signal
     modified_signal = audio_file_modification(signal, float(args.speed_scale), args.volume)
     save_signal(modified_signal)
 
-    # speech recognition
+    # run speech recognition and log recognised text into JSON
     text = audio_to_text()
     log_result(text)
