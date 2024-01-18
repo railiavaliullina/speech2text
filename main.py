@@ -82,7 +82,7 @@ def log_result(recognised_text):
     log['recognised_text'] = recognised_text
 
     with open(output_file_path, 'w') as fp:
-        json.dump(log, fp)
+        json.dump(log, fp, ensure_ascii=False)
 
     print(f'Speech recognition result saved to: {output_file_path}')
 
@@ -91,10 +91,10 @@ if __name__ == '__main__':
 
     # parse input arguments
     parser = ArgumentParser()
-    parser.add_argument('--lang', default='en', help='Choose audiofile language from list ["en", "ru"]')
-    parser.add_argument('--speed_scale', default='1.5',
+    parser.add_argument('--lang', default='ru', help='Choose audiofile language from list ["en", "ru"]')
+    parser.add_argument('--speed_scale', default='0.7',
                         help='Enter the audio speed scale (if scale = 1, speed will not change)')
-    parser.add_argument('--volume', default='+5',
+    parser.add_argument('--volume', default='-10',
                         help='Enter the audio volume in the format "+<dB value>" or "-<dB value>"')
     parser.add_argument('--input_path', default='input_files')
     parser.add_argument('--output_path', default='output_files')
